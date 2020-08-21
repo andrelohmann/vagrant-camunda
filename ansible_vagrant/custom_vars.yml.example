@@ -1,0 +1,6 @@
+# custom vars will be put here
+
+camunda_install_enterprise: False # True - set credentials
+camunda_port: 80 # Port on which camunda should listen
+#camunda_enterprise_user: __YOUR_USERNAME__ # uncomment, if enterprise edition will be chosen
+#camunda_enterprise_password: __YOUR_PASSWORD__ # uncomment, if enterprise edition will be chosen

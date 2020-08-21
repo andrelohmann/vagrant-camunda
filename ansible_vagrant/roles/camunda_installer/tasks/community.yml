@@ -1,0 +1,11 @@
+---
+
+- name: Download and run Camunda Community Container
+  docker_container:
+    name: camunda
+    image: camunda/camunda-bpm-platform:run-latest
+    state: started
+    ports:
+     - "{{ camunda_port }}:8080"
+
+...

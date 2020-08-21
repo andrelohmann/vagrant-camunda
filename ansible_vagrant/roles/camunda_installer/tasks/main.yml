@@ -1,0 +1,26 @@
+---
+
+- name: add python docker module
+  apt:
+    name: "{{ packages }}"
+    state: present
+    dpkg_options: 'force-confnew,force-confdef'
+    autoclean: yes
+    autoremove: yes
+    update_cache: yes
+    cache_valid_time: 3600
+  vars:
+    packages:
+    - python3-docker
+
+- name: run camunda community installer
+  include: community.yml
+  when:
+  - camunda_install_enterprise == False
+
+- name: run camunda community installer
+  include: enterprise.yml
+  when:
+  - camunda_install_enterprise == True
+
+...
