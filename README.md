@@ -54,4 +54,9 @@ vagrant up
 
 If you havn't changed the test domains in config.yml and port in custom_vars.yml, you can open camunda the following way:
 
-  * http://camunda.lokal
+  * http://camunda.lokal/camunda
+
+You can sign in with following credentials:
+
+  * User: demo
+  * Password: demo

@@ -10,7 +10,7 @@
 - name: Download and run Camunda Enterprise Container
   docker_container:
     name: camunda
-    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:7.10.0
+    image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:7.13.3
     state: started
     ports:
      - "{{ camunda_port }}:8080"
