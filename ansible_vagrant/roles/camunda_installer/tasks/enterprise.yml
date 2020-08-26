@@ -1,5 +1,13 @@
 ---
 
+- name: Create license file
+  template:
+    src: camunda-license.txt.j2
+    dest: /root/camunda-license.txt
+    owner: root
+    group: root
+    mode: 0644
+
 - name: Log into registry.camunda.cloud
   docker_login:
     registry: registry.camunda.cloud
@@ -12,7 +20,24 @@
     name: camunda
     image: registry.camunda.cloud/cambpm-ee/camunda-bpm-platform-ee:7.13.3
     state: started
+    volumes:
+    - /root/camunda-license.txt:/camunda/.camunda/license.txt
     ports:
      - "{{ camunda_port }}:8080"
+
+- name: Download and run Camunda Optimizer Container
+  docker_container:
+    name: optimize
+    image: registry.camunda.cloud/optimize-ee/optimize:3.1.0
+    state: started
+    env:
+      OPTIMIZE_CAMUNDABPM_REST_URL: "http://{{ vagrant_self_ip }}/engine-rest"
+      OPTIMIZE_ELASTICSEARCH_HOST: "{{ vagrant_self_ip }}"
+      OPTIMIZE_ELASTICSEARCH_HTTP_PORT: "9200"
+    volumes:
+    - /root/camunda-license.txt:/optimize/environment/OptimizeLicense.txt:ro
+    ports:
+    - "8090:8090"
+    - "8091:8091"
 
 ...

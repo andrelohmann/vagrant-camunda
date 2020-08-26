@@ -5,9 +5,23 @@
   become_method: sudo
 
   vars:
+    vagrant_self_ip: "{{ SELF_IP }}"
     zulu_openjdk_version: "14"
     docker_users:
     - vagrant
+    elasticsearch_heap_size: 1g
+    elasticsearch_install_elasticsearch: True
+    elasticsearch_install_kibana: False
+    elasticsearch_network_host: "{{ vagrant_self_ip }}"
+    elasticsearch_listen_ip: "{{ vagrant_self_ip }}"
+    # elasticsearch_config_discovery_seed_hosts: '["127.0.0.1", "[::1]"]'
+    elasticsearch_release: 7.9.0
+    elasticsearch_single_node: True
+    elasticsearch_install_auditbeat: False
+    elasticsearch_install_filebeat: False
+    elasticsearch_install_heartbeat: False
+    elasticsearch_install_metricbeat: False
+    elasticsearch_install_packetbeat: False
 
   pre_tasks:
   - name: Include custom_vars.yml
@@ -16,6 +30,7 @@
 
   roles:
   - andrelohmann.root_colored_prompt
+  - andrelohmann.elasticstack
   - andrelohmann.docker
   - andrelohmann.zulu_openjdk
   - camunda_installer

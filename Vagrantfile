@@ -58,7 +58,8 @@ Vagrant.configure("2") do |config|
       ansible.playbook = "ansible_vagrant/playbook.yml"
       ansible.galaxy_role_file = "ansible_vagrant/requirements.yml"
       ansible.extra_vars = {
-        ansible_python_interpreter:"/usr/bin/python3"
+        ansible_python_interpreter:"/usr/bin/python3",
+        SELF_IP: vagrant_config['ip']
       }
   end
   config.ssh.forward_agent = true
